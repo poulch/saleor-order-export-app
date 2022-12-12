@@ -1,0 +1,11 @@
+.container {
+  position: relative;
+  z-index: 3;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.container > div {
+  box-shadow: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+}

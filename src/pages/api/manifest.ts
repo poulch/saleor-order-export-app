@@ -9,12 +9,7 @@ export default createManifestHandler({
       name: packageJson.name,
       tokenTargetUrl: `${context.appBaseUrl}/api/register`,
       appUrl: context.appBaseUrl,
-      permissions: [
-        /**
-         * Set permissions for app if needed
-         * https://docs.saleor.io/docs/3.x/developer/permissions
-         */
-      ],
+      permissions: ["MANAGE_ORDERS"],
       id: "saleor.app",
       version: packageJson.version,
       webhooks: [
@@ -25,10 +20,13 @@ export default createManifestHandler({
          */
       ],
       extensions: [
-        /**
-         * Optionally, extend Dashboard with custom UIs
-         * https://docs.saleor.io/docs/3.x/developer/extending/apps/extending-dashboard-with-apps
-         */
+        {
+          label: "New Export orders to Google Sheet",
+          mount: "NAVIGATION_ORDERS",
+          permissions: ["MANAGE_ORDERS"],
+          target: "APP_PAGE",
+          url: "/",
+        },
       ],
     };
 

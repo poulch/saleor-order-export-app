@@ -6,6 +6,8 @@ import { RoutePropagator } from "@saleor/app-sdk/app-bridge/next";
 import { ThemeProvider as MacawUIThemeProvider } from "@saleor/macaw-ui";
 import React, { PropsWithChildren, useEffect } from "react";
 import { AppProps } from "next/app";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import GraphQLProvider from "../providers/GraphQLProvider";
 import { ThemeSynchronizer } from "../lib/theme-synchronizer";
@@ -44,9 +46,11 @@ function NextApp({ Component, pageProps }: AppProps) {
     <AppBridgeProvider appBridgeInstance={appBridgeInstance}>
       <GraphQLProvider>
         <ThemeProvider overrides={themeOverrides} ssr>
-          <ThemeSynchronizer />
-          <RoutePropagator />
-          <Component {...pageProps} />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <ThemeSynchronizer />
+            <RoutePropagator />
+            <Component {...pageProps} />
+          </LocalizationProvider>
         </ThemeProvider>
       </GraphQLProvider>
     </AppBridgeProvider>
